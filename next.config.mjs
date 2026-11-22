@@ -1,10 +1,19 @@
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
+const isStaticExport = process.env.STATIC_EXPORT === "true";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Business logic stays provider-agnostic; provider SDKs are only pulled in
-  // through the implementation files under src/core/<layer>/providers.
+  ...(isStaticExport
+    ? {
+        output: "export",
+        trailingSlash: true,
+        images: { unoptimized: true },
+        ...(basePath ? { basePath } : {}),
+      }
+    : {}),
   experimental: {
     // Server Actions / Route Handlers run on the Cloudflare Workers runtime
     // via OpenNext. Keep node built-ins out of the edge path.
@@ -13,6 +22,8 @@ const nextConfig = {
 
 export default nextConfig;
 
-// Enable Cloudflare bindings (KV, Queues, etc.) during `next dev`.
-// Safe no-op in environments where the dev platform is unavailable.
-initOpenNextCloudflareForDev();
+if (!isStaticExport) {
+  // Enable Cloudflare bindings (KV, Queues, etc.) during `next dev`.
+  // Safe no-op in environments where the dev platform is unavailable.
+  initOpenNextCloudflareForDev();
+}

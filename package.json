@@ -1,12 +1,13 @@
 {
-  "name": "nexara-foundation",
+  "name": "acharyodaya-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Nexara Foundation V1 — provider-agnostic platform foundation (Next.js 15 + React 19 + Cloudflare Workers via OpenNext).",
+  "description": "Acharyodaya B2B Export Website & Client Wireframe Prototypes — built on Nexara Foundation V1.",
   "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:pages": "node scripts/build-pages.mjs",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
@@ -22,7 +23,7 @@
     "aws4fetch": "^1.0.20",
     "bcryptjs": "^3.0.3",
     "jose": "^6.2.10",
-    "next": "15.3.0",
+    "next": "^15.5.18",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 /**
  * Dynamic robots.txt Generator.
  * Sets crawling permissions and sitemap paths for search engine bots.

@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 /**
  * Dynamic Sitemap Generator.
  * Lists all crawlable routes within the Nexara platform modules.
