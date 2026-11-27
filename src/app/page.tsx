@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/modules/wireframes/presentation/BrandLogo";
 import {
   WIREFRAME_OPTIONS,
   WIREFRAME_PAGES,
@@ -7,77 +8,19 @@ import {
   type WireframeOptionId,
 } from "@/modules/wireframes/domain/wireframe-data";
 
-function MiniThumbnail({ id }: { id: WireframeOptionId }) {
-  if (id === "editorial") {
-    return (
-      <div className="wf-mini-frame" style={{ background: "#FAF7F0" }} aria-hidden="true">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6 }}>
-          <div className="wf-mini-bar" style={{ width: "26%", background: "#DCD2BE" }} />
-          <div className="wf-mini-bar" style={{ width: "30%", background: "#062C1A" }} />
-          <div className="wf-mini-bar" style={{ width: "26%", background: "#DCD2BE" }} />
-        </div>
-        <div style={{ textAlign: "center", padding: "6px 12px" }}>
-          <div className="wf-mini-bar" style={{ width: "70%", margin: "0 auto 6px", height: 12, background: "#062C1A" }} />
-          <div className="wf-mini-bar" style={{ width: "45%", margin: "0 auto", height: 7, background: "#EC4A1E" }} />
-        </div>
-        <div className="wf-mini-block" style={{ height: 56, background: "linear-gradient(135deg, #062C1A 0%, #17702F 65%, #8CC63F 100%)" }} />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 6 }}>
-          <div className="wf-mini-block" style={{ height: 26 }} />
-          <div className="wf-mini-block" style={{ height: 26 }} />
-          <div className="wf-mini-block" style={{ height: 26 }} />
-        </div>
-      </div>
-    );
-  }
+const PREVIEW: Record<WireframeOptionId, { img: string; caption: string }> = {
+  editorial: { img: "/images/hero-sunrise.jpg", caption: "Story-led · Serif" },
+  b2b: { img: "/images/port-containers.jpg", caption: "Spec-first · RFQ" },
+  journey: { img: "/images/farmer-harvest.jpg", caption: "Origin · Traceability" },
+};
 
-  if (id === "b2b") {
-    return (
-      <div className="wf-mini-frame" style={{ background: "#FFFFFF" }} aria-hidden="true">
-        <div className="wf-mini-bar" style={{ height: 7, background: "#062C1A" }} />
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 6 }}>
-          <div className="wf-mini-bar" style={{ width: "26%", background: "#17702F" }} />
-          <div className="wf-mini-bar" style={{ width: "40%", background: "#E3F0D7" }} />
-          <div className="wf-mini-bar" style={{ width: "22%", background: "#EC4A1E" }} />
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 8 }}>
-          <div style={{ display: "grid", gap: 5 }}>
-            <div className="wf-mini-bar" style={{ height: 14, background: "#062C1A" }} />
-            <div className="wf-mini-bar" style={{ height: 8, width: "80%", background: "#D5DFD0" }} />
-            <div className="wf-mini-bar" style={{ height: 12, width: "55%", background: "#EC4A1E" }} />
-          </div>
-          <div className="wf-mini-block" style={{ height: 60, borderTop: "3px solid #EC4A1E", background: "#F4F8F1" }} />
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 4 }}>
-          <div className="wf-mini-bar" style={{ height: 18, borderTop: "2px solid #F9B233", background: "#F4F8F1" }} />
-          <div className="wf-mini-bar" style={{ height: 18, borderTop: "2px solid #F9B233", background: "#F4F8F1" }} />
-          <div className="wf-mini-bar" style={{ height: 18, borderTop: "2px solid #F9B233", background: "#F4F8F1" }} />
-          <div className="wf-mini-bar" style={{ height: 18, borderTop: "2px solid #F9B233", background: "#F4F8F1" }} />
-        </div>
-      </div>
-    );
-  }
-
+function DirectionPreview({ id }: { id: WireframeOptionId }) {
+  const p = PREVIEW[id];
   return (
-    <div className="wf-mini-frame" style={{ background: "#FFFDF8" }} aria-hidden="true">
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 6 }}>
-        <div className="wf-mini-bar" style={{ width: "30%", background: "#062C1A" }} />
-        <div className="wf-mini-bar" style={{ width: "42%", background: "#E4F0D8" }} />
-        <div className="wf-mini-bar" style={{ width: "18%", borderRadius: 99, background: "#17702F" }} />
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 8 }}>
-        <div style={{ display: "grid", gap: 5, alignContent: "center" }}>
-          <div className="wf-mini-bar" style={{ height: 12, background: "#062C1A" }} />
-          <div className="wf-mini-bar" style={{ height: 8, width: "85%", background: "#D4E0C8" }} />
-          <div className="wf-mini-bar" style={{ height: 10, width: "60%", background: "#17702F" }} />
-        </div>
-        <div className="wf-mini-block" style={{ height: 64, background: "linear-gradient(135deg, #FCE8C9 0%, #F9B233 50%, #EC4A1E 100%)" }} />
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
-        <div className="wf-mini-block" style={{ height: 24, borderTop: "2px solid #17702F" }} />
-        <div className="wf-mini-block" style={{ height: 24, borderTop: "2px solid #8CC63F" }} />
-        <div className="wf-mini-block" style={{ height: 24, borderTop: "2px solid #F9B233" }} />
-        <div className="wf-mini-block" style={{ height: 24, borderTop: "2px solid #EC4A1E" }} />
-      </div>
+    <div className="wf-media wf-media-shade" style={{ height: 220 }} aria-hidden="true">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="wf-media-img" src={assetPath(p.img)} alt="" />
+      <span className="wf-media-caption">{p.caption}</span>
     </div>
   );
 }
@@ -87,15 +30,10 @@ export default function WireframeSelectorHomePage() {
     <main>
       <div className="wf-sunrise-bar" />
       {/* Branded Forest Ink Hero Banner */}
-      <header className="wf-section-forest" style={{ padding: "40px 0 44px" }}>
+      <header className="wf-section-forest" style={{ padding: "56px 0 64px" }}>
         <div className="wf-container">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20, marginBottom: 24 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={assetPath("/brand/acharyodaya-logo-reverse.svg")}
-              alt="Acharyodaya — Connecting Farms to the World"
-              style={{ height: 62, width: "auto", display: "block" }}
-            />
+            <BrandLogo height={56} surface="reverse" />
             <div className="wf-swatch-row">
               <span className="wf-swatch"><span className="wf-swatch-dot" style={{ background: "#062C1A" }} />Forest #062C1A</span>
               <span className="wf-swatch"><span className="wf-swatch-dot" style={{ background: "#17702F" }} />Leaf #17702F</span>
@@ -108,10 +46,10 @@ export default function WireframeSelectorHomePage() {
           <p className="wf-eyebrow">Acharyodaya · B2B Agricultural Export Website · Client Review</p>
           <h1 className="wf-h1 wf-serif">Website Prototypes — Pick a Direction</h1>
           <p className="wf-lead" style={{ marginBottom: 0 }}>
-            Explore <strong>3 full-color branded directions</strong> built with Acharyodaya&rsquo;s finalized logo,
-            Forest Ink, Leaf Green, Saffron, Marigold, and Ivory palette—each featuring{" "}
-            <strong>8 clickable B2B export pages</strong> on the Nexara Foundation framework. You can also toggle
-            between Brand Color and Grayscale Wireframe mode inside any prototype.
+            Explore <strong>3 premium branded directions</strong> built on the Acharyodaya wordmark and{" "}
+            <em>The Rise of Excellence</em> — each with <strong>8 clickable B2B export pages</strong>, photography and
+            live dummy content. Use the <strong>Theme</strong> button (bottom right) to switch Light / Dark mode and try any
+            accent colour across every page.
           </p>
         </div>
       </header>
@@ -124,20 +62,20 @@ export default function WireframeSelectorHomePage() {
 
           <div className="wf-grid-3">
             {WIREFRAME_OPTIONS.map((opt) => (
-              <article key={opt.id} className="wf-card">
+              <article key={opt.id} className="wf-card wf-card-hover">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <span className="wf-tag wf-tag-saffron">{opt.code}</span>
-                  <span style={{ fontFamily: "var(--wf-font-mono)", fontSize: 11, color: "var(--brand-leaf)", fontWeight: 600 }}>
+                  <span className="wf-meta" style={{ fontWeight: 600 }}>
                     8 CLICKABLE PAGES
                   </span>
                 </div>
 
-                <MiniThumbnail id={opt.id} />
+                <DirectionPreview id={opt.id} />
 
                 <h3 className={`wf-h2 ${opt.id === "editorial" ? "wf-serif" : ""}`} style={{ marginBottom: 4 }}>
                   {opt.name}
                 </h3>
-                <p style={{ fontSize: 13, fontWeight: 600, margin: 0, color: "var(--brand-forest)" }}>
+                <p style={{ fontSize: 13, fontWeight: 600, margin: 0, color: "var(--wf-heading)" }}>
                   {opt.tagline}
                 </p>
                 <p className="wf-body" style={{ marginBottom: 4 }}>{opt.summary}</p>
@@ -170,7 +108,7 @@ export default function WireframeSelectorHomePage() {
           <h2 className="wf-h2 wf-serif">Compare Any Page Across All 3 Directions</h2>
           <p className="wf-lead" style={{ marginBottom: 24 }}>
             Inside any prototype, use the top control bar to switch between Option A, Option B, and Option C
-            while staying on the exact same page—or toggle Brand Color vs. Grayscale Wireframe mode.
+            while staying on the exact same page — or toggle Brand Color vs. Grayscale Wireframe mode.
           </p>
 
           <div className="wf-table-wrap">
@@ -226,9 +164,9 @@ export default function WireframeSelectorHomePage() {
             </div>
             <div className="wf-card">
               <span className="wf-step-num">02</span>
-              <h3 className="wf-h3">Swap Real Photography &amp; Copy</h3>
+              <h3 className="wf-h3">Swap in Real Photography &amp; Copy</h3>
               <p className="wf-body" style={{ marginBottom: 0 }}>
-                Replace art-direction frames with authentic farm, spice/grain, facility, and port photography.
+                Current imagery is AI-generated for direction only — replace with commissioned farm, facility and port photography.
               </p>
             </div>
             <div className="wf-card">

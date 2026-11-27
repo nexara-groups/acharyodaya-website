@@ -32,6 +32,9 @@ export interface SampleProduct {
   shelfLife: string;
   certifications: string[];
   summary: string;
+  image: string;
+  priceBand: string;
+  flavour: string;
 }
 
 export const WIREFRAME_OPTIONS: readonly WireframeOptionMeta[] = [
@@ -65,7 +68,7 @@ export const WIREFRAME_OPTIONS: readonly WireframeOptionMeta[] = [
     name: "Farm-to-World Journey",
     tagline: "Visual traceability, regional Indian origins & modular storytelling",
     summary:
-      "Centers the Acharyodaya tagline ('Connecting Farms to the World') through step-by-step origin-to-port flows, regional sourcing spotlights, and alternating narrative blocks.",
+      "Brings the brand promise, 'The Rise of Excellence', to life through step-by-step origin-to-port flows, regional sourcing spotlights, and alternating narrative blocks.",
     bestFor: "Traceability-conscious markets (EU, North America, Japan) and sustainable sourcing narratives.",
     traits: ["Origin-to-port timeline", "Regional farm spotlights", "Alternating narrative blocks"],
     headerStyle: "Clean horizontal bar with inquiry pill",
@@ -98,6 +101,9 @@ export const SAMPLE_PRODUCTS: readonly SampleProduct[] = [
     shelfLife: "24 Months",
     certifications: ["APEDA", "FSSAI", "ISO 22000", "Phytosanitary"],
     summary: "Extra-long slender aromatic grain with high elongation ratio, sorted via optical color sorters for international retail and foodservice buyers.",
+    image: "/images/basmati-rice.jpg",
+    priceBand: "US$ 1,180 – 1,260 / MT FOB",
+    flavour: "Floral, buttery aroma · 2.2× elongation on cooking",
   },
   {
     slug: "turmeric-fingers-salem",
@@ -112,6 +118,9 @@ export const SAMPLE_PRODUCTS: readonly SampleProduct[] = [
     shelfLife: "24 Months",
     certifications: ["Spices Board", "FSSAI", "HACCP", "Lab COA"],
     summary: "Deep golden-yellow cured rhizomes with verified curcumin levels, tested for heavy metals, aflatoxin, and pesticide residues.",
+    image: "/images/turmeric.jpg",
+    priceBand: "US$ 1,950 – 2,240 / MT FOB",
+    flavour: "Earthy, warm, peppery · deep golden cut",
   },
   {
     slug: "green-cardamom-idukki",
@@ -126,6 +135,9 @@ export const SAMPLE_PRODUCTS: readonly SampleProduct[] = [
     shelfLife: "18 Months",
     certifications: ["Spices Board", "FSSAI", "ISO 22000"],
     summary: "Hand-harvested aromatic green pods graded by sieve size and color uniformity for Middle East, European, and specialty spice markets.",
+    image: "/images/cardamom.jpg",
+    priceBand: "US$ 21.5 – 24.0 / kg FOB",
+    flavour: "Eucalyptus-bright, sweet resinous finish",
   },
   {
     slug: "black-pepper-malabar",
@@ -140,6 +152,9 @@ export const SAMPLE_PRODUCTS: readonly SampleProduct[] = [
     shelfLife: "24 Months",
     certifications: ["Spices Board", "HACCP", "Steam Sterilized Option"],
     summary: "Sun-dried peppercorns prized for balanced piperine pungency and volatile oil content, available raw or steam-sterilized.",
+    image: "/images/black-pepper.jpg",
+    priceBand: "US$ 6,900 – 7,400 / MT FOB",
+    flavour: "Bold pungency · citrus-pine top notes",
   },
   {
     slug: "organic-jaggery-powder",
@@ -154,6 +169,9 @@ export const SAMPLE_PRODUCTS: readonly SampleProduct[] = [
     shelfLife: "12 Months",
     certifications: ["FSSAI", "NPOP Organic", "ISO 22000"],
     summary: "Minimally processed traditional sweetener retaining natural trace minerals, tailored for health-food importers and clean-label brands.",
+    image: "/images/jaggery.jpg",
+    priceBand: "US$ 980 – 1,120 / MT FOB",
+    flavour: "Caramel, molasses and toffee notes",
   },
   {
     slug: "dehydrated-moringa-leaf",
@@ -168,6 +186,9 @@ export const SAMPLE_PRODUCTS: readonly SampleProduct[] = [
     shelfLife: "18 Months",
     certifications: ["FSSAI", "HACCP", "NPOP Organic", "Third-Party COA"],
     summary: "Low-temperature shade-dried Moringa oleifera leaves milled in hygienic facilities to preserve chlorophyll and nutrient profile.",
+    image: "/images/moringa.jpg",
+    priceBand: "US$ 4.2 – 5.1 / kg FOB",
+    flavour: "Grassy, spinach-like, clean mineral finish",
   },
 ] as const;
 

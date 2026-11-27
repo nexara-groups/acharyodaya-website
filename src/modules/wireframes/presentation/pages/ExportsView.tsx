@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { optionHref, type WireframeOptionId } from "../../domain/wireframe-data";
+import { SCENE_IMAGES } from "../../domain/showcase-content";
 import { MediaBox, SectionNote } from "../WireframePrimitives";
+import { MarketsMarquee, RouteMap, ShipmentBoard } from "../PremiumModules";
 
 export function ExportsView({ option }: { option: WireframeOptionId }) {
   const isSerif = option === "editorial";
@@ -10,37 +12,44 @@ export function ExportsView({ option }: { option: WireframeOptionId }) {
       <section className="wf-section">
         <div className="wf-container">
           <SectionNote text="Page 07 (Global Reach & Exports): Trade terms, ports, container capacities, and regional market coverage" />
-          <p className="wf-eyebrow">Global Reach &amp; Export Logistics</p>
-          <h1 className={`wf-h1 ${isSerif ? "wf-serif" : ""}`}>
-            Seamless Shipping From Major Indian Ports Worldwide
-          </h1>
-          <p className="wf-lead">
-            Whether you require a single LCL trial pallet or recurring 40ft FCL shipments, our export desk coordinates documentation, stuffing, customs clearance, and ocean/air freight.
-          </p>
-          <MediaBox label="[GLOBAL TRADE ROUTES MAP · India Ports (Nhava Sheva, Mundra, Cochin) → Middle East, EU, US, APAC]" height={280} />
+          <div className="wf-split-60-40" style={{ marginBottom: 48 }}>
+            <div>
+              <p className="wf-eyebrow">Global Reach &amp; Export Logistics</p>
+              <h1 className={`wf-h1 ${isSerif ? "wf-serif" : ""}`}>
+                Seamless Shipping From Major Indian Ports Worldwide
+              </h1>
+              <p className="wf-lead" style={{ marginBottom: 0 }}>
+                Whether you require a single LCL trial pallet or recurring 40ft FCL shipments, our export desk coordinates documentation, stuffing, customs clearance, and ocean/air freight.
+              </p>
+            </div>
+            <MediaBox label="Container port at sunrise" src={SCENE_IMAGES.port} height={360} caption="Nhava Sheva · JNPA" />
+          </div>
+          <RouteMap />
         </div>
       </section>
+
+      <MarketsMarquee option={option} />
 
       <section className="wf-section wf-section-alt">
         <div className="wf-container">
           <SectionNote text="Trade Terms & Container Capabilities Grid: Answers standard procurement logistics questions upfront" />
           <div className="wf-grid-4">
-            <div className="wf-card">
+            <div className="wf-card wf-card-hover">
               <p className="wf-eyebrow">Incoterms</p>
               <h2 className="wf-h3">FOB · CIF · CFR · DDP</h2>
               <p className="wf-body" style={{ marginBottom: 0 }}>Flexible trade terms aligned to your freight forwarder or our shipping lines.</p>
             </div>
-            <div className="wf-card">
+            <div className="wf-card wf-card-hover">
               <p className="wf-eyebrow">Load Options</p>
               <h2 className="wf-h3">20ft / 40ft FCL &amp; LCL</h2>
               <p className="wf-body" style={{ marginBottom: 0 }}>Mixed-commodity container consolidation available for distributors.</p>
             </div>
-            <div className="wf-card">
+            <div className="wf-card wf-card-hover">
               <p className="wf-eyebrow">Packaging</p>
               <h2 className="wf-h3">Bulk &amp; Private Label</h2>
               <p className="wf-body" style={{ marginBottom: 0 }}>25/50 kg bulk bags, vacuum cartons, or custom retail pouches.</p>
             </div>
-            <div className="wf-card">
+            <div className="wf-card wf-card-hover">
               <p className="wf-eyebrow">Indian Ports</p>
               <h2 className="wf-h3">Nhava Sheva · Mundra · Cochin</h2>
               <p className="wf-body" style={{ marginBottom: 0 }}>Plus Chennai &amp; major air cargo hubs for high-value spice orders.</p>
@@ -92,6 +101,9 @@ export function ExportsView({ option }: { option: WireframeOptionId }) {
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div style={{ marginBottom: 32 }}>
+            <ShipmentBoard option={option} count={6} />
           </div>
           <Link href={optionHref(option, "contact")} className="wf-btn wf-btn-primary">
             Request Freight &amp; Product Quote →

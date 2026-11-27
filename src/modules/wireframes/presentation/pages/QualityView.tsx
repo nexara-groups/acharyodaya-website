@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { optionHref, type WireframeOptionId } from "../../domain/wireframe-data";
+import { SCENE_IMAGES } from "../../domain/showcase-content";
 import { MediaBox, SectionNote } from "../WireframePrimitives";
+import { InsightsSection } from "../PremiumModules";
 
 const CERTS = [
   { code: "APEDA", title: "APEDA Registered Exporter", desc: "Agricultural & Processed Food Products Export Development Authority compliance." },
@@ -29,7 +31,7 @@ export function QualityView({ option }: { option: WireframeOptionId }) {
 
           <div className="wf-grid-3" style={{ marginTop: 28 }}>
             {CERTS.map((c) => (
-              <div key={c.code} className="wf-card">
+              <div key={c.code} className="wf-card wf-card-hover">
                 <div className="wf-tag" style={{ alignSelf: "flex-start" }}>{c.code}</div>
                 <h2 className={`wf-h3 ${isSerif ? "wf-serif" : ""}`}>{c.title}</h2>
                 <p className="wf-body" style={{ marginBottom: 0 }}>{c.desc}</p>
@@ -39,7 +41,25 @@ export function QualityView({ option }: { option: WireframeOptionId }) {
         </div>
       </section>
 
-      <section className="wf-section wf-section-alt">
+      <section className="wf-section-compact wf-section-alt">
+        <div className="wf-container">
+          <div className="wf-grid-4">
+            {[
+              ["142", "Parameters tested per lot"],
+              ["0.18%", "Lot rejection rate"],
+              ["< 10 ppb", "Aflatoxin B1 limit"],
+              ["3", "Accredited lab partners"],
+            ].map(([v, l]) => (
+              <div key={l} className="wf-metric">
+                <div className="wf-metric-val">{v}</div>
+                <div className="wf-metric-lbl">{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="wf-section">
         <div className="wf-container">
           <SectionNote text="Lab Testing & Document Pack Block: Shows buyers exactly what paperwork accompanies each shipment" />
           <div className="wf-split-60-40">
@@ -62,10 +82,12 @@ export function QualityView({ option }: { option: WireframeOptionId }) {
                 </Link>
               </div>
             </div>
-            <MediaBox label="[QUALITY LAB PHOTO · 4:3 · Moisture meter, sieve analysis & COA inspection]" height={250} />
+            <MediaBox label="Scientist examining rice grains in a food-safety lab" src={SCENE_IMAGES.lab} height={420} caption="NABL partner lab · Mumbai" />
           </div>
         </div>
       </section>
+
+      <InsightsSection option={option} alt />
     </>
   );
 }

@@ -2,7 +2,8 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { SAMPLE_PRODUCTS, type WireframeOptionId } from "../../domain/wireframe-data";
-import { SectionNote } from "../WireframePrimitives";
+import { CONTACT, SCENE_IMAGES } from "../../domain/showcase-content";
+import { MediaBox, SectionNote } from "../WireframePrimitives";
 
 export function ContactView({
   option,
@@ -46,11 +47,12 @@ export function ContactView({
 
             {submitted ? (
               <div className="wf-card-dashed" style={{ padding: 28 }}>
-                <p className="wf-eyebrow">[WIREFRAME INTERACTION STATE]</p>
-                <h2 className="wf-h2">RFQ Submitted (Prototype Confirmation)</h2>
+                <p className="wf-eyebrow">RFQ received · Ref ACY-RFQ-26-0418</p>
+                <h2 className="wf-h2">Thank you{company ? `, ${company}` : ""}.</h2>
                 <p className="wf-body">
-                  Thank you{company ? `, ${company}` : ""}. Your sample inquiry for <strong>{product}</strong> has been captured in this wireframe prototype. In production, this submits to a Nexara API module + email notification.
+                  Your inquiry for <strong>{product}</strong> is with our export desk. Expect a formal FOB / CIF quotation and specification sheet within 48 hours.
                 </p>
+                <p className="wf-meta" style={{ marginBottom: 16 }}>Prototype only — in production this posts to a Nexara API module and emails the desk.</p>
                 <button
                   type="button"
                   className="wf-btn wf-btn-secondary wf-btn-sm"
@@ -64,7 +66,7 @@ export function ContactView({
                 <div className="wf-grid-2" style={{ gap: 16 }}>
                   <div className="wf-field" style={{ marginBottom: 0 }}>
                     <label className="wf-label" htmlFor="wf-name">Full Name *</label>
-                    <input id="wf-name" className="wf-input" required placeholder="e.g. Rajesh Sharma" />
+                    <input id="wf-name" className="wf-input" required placeholder="e.g. Sarah Lindqvist" />
                   </div>
                   <div className="wf-field" style={{ marginBottom: 0 }}>
                     <label className="wf-label" htmlFor="wf-company">Company / Importer Name *</label>
@@ -74,7 +76,7 @@ export function ContactView({
                       required
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      placeholder="e.g. Al-Noor Foods Trading LLC"
+                      placeholder="e.g. Northwind Fine Foods Ltd."
                     />
                   </div>
                 </div>
@@ -128,7 +130,7 @@ export function ContactView({
                 </div>
 
                 <button type="submit" className="wf-btn wf-btn-primary">
-                  Submit Export Inquiry (Wireframe Test) →
+                  Submit Export Inquiry →
                 </button>
               </form>
             )}
@@ -137,17 +139,29 @@ export function ContactView({
           <aside style={{ display: "grid", gap: 20 }}>
             <div className="wf-card-dashed">
               <p className="wf-eyebrow">Direct Export Desk</p>
-              <h2 className="wf-h3">Acharyodaya Exports</h2>
+              <h2 className="wf-h3">{CONTACT.company}</h2>
               <p className="wf-body">
-                <strong>Email:</strong> exports@acharyodaya.com<br />
-                <strong>Phone / WhatsApp:</strong> +91 XX XXXX XXXX<br />
-                <strong>Hours:</strong> Mon–Sat, 09:30–18:30 IST
+                <strong>Email:</strong> {CONTACT.email}<br />
+                <strong>Phone:</strong> {CONTACT.phone}<br />
+                <strong>WhatsApp:</strong> {CONTACT.whatsapp}<br />
+                <strong>Hours:</strong> {CONTACT.hours}
               </p>
               <p className="wf-body" style={{ marginBottom: 0 }}>
                 <strong>Corporate Office:</strong><br />
-                [Street Address Placeholder]<br />
-                [City, State, PIN — India]
+                {CONTACT.address}
               </p>
+            </div>
+
+            <MediaBox label="Export warehouse with stacked sacks of rice and spices" src={SCENE_IMAGES.warehouse} height={220} caption="Mumbai consolidation warehouse" />
+
+            <div className="wf-card" style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
+              <span className="wf-avatar">VD</span>
+              <span className="wf-person">
+                <span>
+                  <strong>Vikram Desai</strong>
+                  <span>Director, Global Trade · replies personally to new buyers</span>
+                </span>
+              </span>
             </div>
 
             <div className="wf-card">

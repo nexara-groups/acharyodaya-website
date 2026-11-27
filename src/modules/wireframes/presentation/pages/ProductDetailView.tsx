@@ -5,7 +5,9 @@ import {
   optionHref,
   type WireframeOptionId,
 } from "../../domain/wireframe-data";
+import { SCENE_IMAGES } from "../../domain/showcase-content";
 import { MediaBox, SectionNote } from "../WireframePrimitives";
+import { TestimonialsSection } from "../PremiumModules";
 
 export function ProductDetailView({
   option,
@@ -29,11 +31,18 @@ export function ProductDetailView({
 
           <div className="wf-split-40-60" style={{ alignItems: "start" }}>
             <div style={{ display: "grid", gap: 12 }}>
-              <MediaBox label={`[PRIMARY PRODUCT PHOTO · 4:3 · ${product.name}]`} height={290} />
+              <MediaBox label={product.name} src={product.image} height={440} caption={`Lot ACY-${product.hsCode.replace(/\./g, "").slice(0, 6)} · Harvest 2026`} />
               <div className="wf-grid-3" style={{ gap: 10 }}>
-                <MediaBox label="[MACRO GRAIN/SPICE]" height={76} />
-                <MediaBox label="[EXPORT BAG]" height={76} />
-                <MediaBox label="[LAB COA SAMPLE]" height={76} />
+                <MediaBox label="Sourcing region" src={SCENE_IMAGES.farmer} height={110} />
+                <MediaBox label="Export packing" src={SCENE_IMAGES.warehouse} height={110} />
+                <MediaBox label="Lab COA testing" src={SCENE_IMAGES.lab} height={110} />
+              </div>
+              <div className="wf-card" style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+                <span>
+                  <span className="wf-meta">Indicative price · week 48</span>
+                  <strong style={{ display: "block", fontSize: 20, color: "var(--wf-heading)" }}>{product.priceBand}</strong>
+                </span>
+                <span className="wf-tag">In stock · ships in 11 days</span>
               </div>
             </div>
 
@@ -69,6 +78,10 @@ export function ProductDetailView({
                       <td>{product.packaging}</td>
                     </tr>
                     <tr>
+                      <th>Sensory Profile</th>
+                      <td>{product.flavour}</td>
+                    </tr>
+                    <tr>
                       <th>Shelf Life</th>
                       <td>{product.shelfLife}</td>
                     </tr>
@@ -94,7 +107,7 @@ export function ProductDetailView({
                   Request Quote for This Product →
                 </Link>
                 <Link href={optionHref(option, "quality")} className="wf-btn wf-btn-secondary">
-                  Download Spec &amp; COA Placeholder
+                  Download Spec Sheet &amp; Sample COA
                 </Link>
               </div>
             </div>
@@ -107,7 +120,8 @@ export function ProductDetailView({
           <p className="wf-eyebrow">Related Export Commodities</p>
           <div className="wf-grid-3">
             {related.map((p) => (
-              <Link key={p.slug} href={optionHref(option, `products/${p.slug}`)} className="wf-card">
+              <Link key={p.slug} href={optionHref(option, `products/${p.slug}`)} className="wf-card" style={{ padding: 12 }}>
+                <MediaBox label={p.name} src={p.image} height={170} />
                 <span className="wf-eyebrow" style={{ margin: 0 }}>{p.category} · HS {p.hsCode}</span>
                 <strong style={{ fontSize: 15 }}>{p.name}</strong>
                 <span style={{ fontSize: 12, color: "var(--wf-muted)" }}>MOQ: {p.moq} →</span>
@@ -116,6 +130,8 @@ export function ProductDetailView({
           </div>
         </div>
       </section>
+
+      <TestimonialsSection option={option} />
     </>
   );
 }

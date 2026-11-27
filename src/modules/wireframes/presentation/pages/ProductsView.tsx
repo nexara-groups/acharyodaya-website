@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   SAMPLE_PRODUCTS,
+  assetPath,
   optionHref,
   type WireframeOptionId,
 } from "../../domain/wireframe-data";
 import { MediaBox, SectionNote } from "../WireframePrimitives";
+import { InsightsSection } from "../PremiumModules";
 
 const CATEGORIES = ["All", "Grains & Rice", "Whole Spices", "Superfoods & Sweeteners"] as const;
 
@@ -64,8 +66,14 @@ export function ProductsView({ option }: { option: WireframeOptionId }) {
                   {filtered.map((p) => (
                     <tr key={p.slug}>
                       <td>
-                        <strong>{p.name}</strong>
-                        <div style={{ fontSize: 12, color: "var(--wf-muted)" }}>{p.origin}</div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={assetPath(p.image)} alt="" style={{ width: 48, height: 48, borderRadius: 10, objectFit: "cover", flex: "none" }} />
+                          <span>
+                            <strong>{p.name}</strong>
+                            <div style={{ fontSize: 12, color: "var(--wf-muted)" }}>{p.origin}</div>
+                          </span>
+                        </div>
                       </td>
                       <td>{p.category}</td>
                       <td><code>{p.hsCode}</code></td>
@@ -85,8 +93,8 @@ export function ProductsView({ option }: { option: WireframeOptionId }) {
           ) : (
             <div className={option === "editorial" ? "wf-grid-2" : "wf-grid-3"}>
               {filtered.map((p) => (
-                <article key={p.slug} className="wf-card">
-                  <MediaBox label={`[PRODUCT PHOTO · ${p.name}]`} height={option === "editorial" ? 220 : 170} />
+                <article key={p.slug} className="wf-card wf-card-hover" style={{ padding: 14 }}>
+                  <MediaBox label={p.name} src={p.image} height={option === "editorial" ? 320 : 220} caption={p.origin.split(",")[0]} />
                   <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
                     <span className="wf-eyebrow" style={{ margin: 0 }}>{p.category}</span>
                     <span className="wf-tag">HS {p.hsCode}</span>
@@ -98,8 +106,9 @@ export function ProductsView({ option }: { option: WireframeOptionId }) {
                     </p>
                   )}
                   <p className="wf-body">{p.summary}</p>
+                  <p className="wf-meta" style={{ margin: 0 }}>{p.flavour}</p>
                   <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, paddingTop: 8, borderTop: "1px solid var(--wf-border)" }}>
-                    <span style={{ fontSize: 12, color: "var(--wf-muted)" }}>MOQ: {p.moq}</span>
+                    <span style={{ fontSize: 12, color: "var(--wf-muted)", display: "grid" }}><strong style={{ color: "var(--wf-heading)", fontSize: 13 }}>{p.priceBand}</strong>MOQ {p.moq}</span>
                     <Link href={optionHref(option, `products/${p.slug}`)} className="wf-btn wf-btn-secondary wf-btn-sm">
                       View Specs →
                     </Link>
@@ -124,6 +133,8 @@ export function ProductsView({ option }: { option: WireframeOptionId }) {
           </Link>
         </div>
       </section>
+
+      <InsightsSection option={option} />
     </>
   );
 }
